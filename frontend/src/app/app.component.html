@@ -1,0 +1,75 @@
+<ix-application>
+  <ix-application-header name="FDS Onboarding Xample App - {{ this.fdsENV }}">
+    <div class="placeholder-logo" slot="logo"><img src="favicon.ico" alt="Trustee" width="48px"></div>
+    <ix-select [value]="selectedTheme" (itemSelectionChange)="onItemSelectionChange($event)"
+      placeholder="Select a theme">
+      <ix-select-item *ngFor="let theme of themes" [label]="theme" [value]="theme"></ix-select-item>
+    </ix-select>
+    <ix-avatar username="John Doe" extra="{{ userinfo.role }}">
+      <ix-dropdown-item label="Email - {{ userinfo.email }} "></ix-dropdown-item>
+      <ix-dropdown-item label="Tenant - {{ userinfo.tenant }} "></ix-dropdown-item>
+      <ix-dropdown-item label="Tier - {{ userinfo.tier }} "></ix-dropdown-item>
+      <ix-dropdown-item label="Logout"></ix-dropdown-item>
+    </ix-avatar>
+  </ix-application-header>
+  <br><br>
+  <div class="loading-container">
+    @if(showSpinner){
+      <div class="spinner-container">
+        <ix-spinner size="large" variant="primary"></ix-spinner>
+      </div>
+      }
+      @else{
+        <ix-content >
+          <br>
+          <ix-content-header slot="header" header-title="Dear User , Welcome to the hello world App for FDS Onboarding.">
+          </ix-content-header>
+          <ix-layout-grid>
+            <ix-row>
+              <ix-col size="5">
+                <ix-blind label="Bellow mentioned Details of the logged in user.">
+                  <br>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Property Name</th>
+                        <th scope="col">Property Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Email</td>
+                        <td>{{ userinfo.email }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Tier</td>
+                        <td>{{ userinfo.tier }} </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>TenantID of the logged in Tenant</td>
+                        <td>{{ userinfo.tenant }} </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ix-blind>
+              </ix-col>
+            </ix-row>
+          </ix-layout-grid>
+        </ix-content>
+      }
+  </div>
+</ix-application>
+
+<ng-template #customModal let-modal>
+  <ix-modal centered>
+    <ix-modal-header hideClose >User Not Authorised </ix-modal-header>
+    <ix-modal-content
+      >You are not authorised user.</ix-modal-content
+    >
+  </ix-modal>
+</ng-template>
+

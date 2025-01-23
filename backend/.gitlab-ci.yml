@@ -1,0 +1,32 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build
+
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  image: docker
+  script:
+    - echo "CI commit ref name is - " $CI_COMMIT_REF_NAME
+    - echo "starting the pipeline..."
+    - echo "The URL is..." $harborDockerRegistryUS
+    - echo "the robot account is ..." $publicRobotAccountID
+    - echo "login to docker repo ..."
+    - docker login $harborDockerRegistryUS -u $publicRobotAccountID -p $publicRobotAccountSecret
+    - echo "Building the image using the docker file ..."
+    - docker build --force-rm -t localy-built-image-backend .
+    - echo "Done with building the app ..."
+    - echo "logout"
+    - docker images
+    - docker logout
+    - echo "docker Login again using robot account with push previlages"
+    - docker login $harborDockerRegistryEU -u $robotPushharbor -p $robotPushHarborSecret
+    - docker images
+    - docker tag localy-built-image-backend harbor.xcr.svcs01eu.prod.eu-central-1.kaas.sws.siemens.com/devadv/fds-hello-world-backend:$CI_COMMIT_REF_NAME
+    - docker push harbor.xcr.svcs01eu.prod.eu-central-1.kaas.sws.siemens.com/devadv/fds-hello-world-backend:$CI_COMMIT_REF_NAME
+    - docker image rm localy-built-image-backend
+    - docker image rm harbor.xcr.svcs01eu.prod.eu-central-1.kaas.sws.siemens.com/devadv/fds-hello-world-backend:$CI_COMMIT_REF_NAME
+    - docker images   
+  only:
+    - tags
+  tags:
+    - FP_490
