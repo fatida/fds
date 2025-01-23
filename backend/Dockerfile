@@ -1,5 +1,4 @@
-# FROM harbor.xcr.svcs01.prod.us-east-1.kaas.sws.siemens.com/tools-images/node:20.15.1_alpine3.19.4_xcd2.4
-FROM node:22-bullseye-slim
+FROM nginx:1.23.2-alpine
 
 WORKDIR /usr/app
 COPY ./ /usr/app
