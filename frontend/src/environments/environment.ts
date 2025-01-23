@@ -1,4 +1,4 @@
 export const environment = {
-  apiURL: '/api',
+  apiURL: '.',
   fdsENV: 'Prod',
 };
