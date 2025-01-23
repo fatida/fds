@@ -35,6 +35,8 @@ app.get("/getUserInfo", async (req, res) => {
     complete: true,
   });
 
+  console.log(decodedToken);
+
   var token = await validateJWTTOken(authHeader.replace("Bearer ", ""));
   console.log(token);
   if (token.active == true) {
