@@ -26,6 +26,7 @@ app.get("/healthCheck", async (req, res) => {
 // route for handling requests from the Angular client
 app.get("/getUserInfo", async (req, res) => {
   const authHeader = req.headers.authorization;
+  console.log(authHeader);
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(400).send("Token is missing or invalid");
   }
