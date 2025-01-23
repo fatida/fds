@@ -26,7 +26,7 @@ app.get("/healthCheck", async (req, res) => {
 // route for handling requests from the Angular client
 app.get("/getUserInfo", async (req, res) => {
   const authHeader = req.headers.authorization;
-  console.log(authHeader);
+  console.log("AuthHeader", authHeader);
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(400).send("Token is missing or invalid");
   }
@@ -36,10 +36,10 @@ app.get("/getUserInfo", async (req, res) => {
     complete: true,
   });
 
-  console.log(decodedToken);
+  console.log("DecodedToken", decodedToken);
 
   var token = await validateJWTTOken(authHeader.replace("Bearer ", ""));
-  console.log(token);
+  console.log("TOKEN", token);
   if (token.active == true) {
     var role;
     for (var key in decodedToken.payload.scope) {
