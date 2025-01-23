@@ -1,4 +1,4 @@
-FROM nginx:1.23.2-alpine
+FROM node:20.7.0-alpine3.17
 
 WORKDIR /usr/app
 COPY ./ /usr/app
