@@ -1,5 +1,4 @@
 export const environment = {
-
-    apiURL : "http://localhost:3000",
-    fdsENV : "Dev"
+  apiURL: 'http://fds-backend:3000',
+  fdsENV: 'Dev',
 };
